@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>NORBURY</title>
+        <meta name="keywords" content="shop, music, jazz, realbook, whispernorbury, mall">
+        <meta name="description" content="This is website for buy realbook.">
+        <link type="text/css" rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <div class="logo2">
+                    <h1><a href="index.html">Norbury</a></h1>
+                    <div class="greeting" id="tt">
+                        <span style="color:rgb(16, 56, 91)" id="welcomeMsg"></span>
+                        <script> // Greeting
+                            let timeH = new Date().getHours();
+                            let wm = document.getElementById("welcomeMsg");
+                            if (timeH >= 6 && timeH < 10) {
+                                wm.innerText = "Good Morning, sir.";
+                            } else if (timeH >= 10 && timeH < 16) {
+                                wm.innerText = "Good afternoon!";
+                            } else if (timeH >= 16 && timeH < 20) {
+                                wm.innerText = "Good evening.";
+                            } else {
+                                wm.innerText = "Good night. How was your day?"
+                            }
+                        </script>
+                    </div>
+                    <div class="navisign">
+                        <div><a href="login.html">Log in</a></div>
+                        <div class="bar"></div>
+                        <div><a href="signup.html">Sign up</a></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <aside>
+            <form>
+                <div class="searchBar">
+                    <input type="text" id="searchItem" placeholder="Search artist, title, etc...">
+                    <button>Search</button>
+                </div>
+            </form>
+        </aside>
+        <main class="main1"></main>
+        <footer>
+            <div class="webdetail" id="plusalpha">
+                <div class="webdecontent">
+                    <div class="webdec">
+                        <br>
+                        Copyright 2023. JeongSunwoo all rights reserved.<br>
+                        This website was constructed to Yonsei Univ. Internet Programming &lt;CSI 2109-01&gt; Lab3.<br>
+                        If you want to use HTML/CSS/JS source codes, please send an e-mail to steve7161@yonsei.ac.kr.<br>
+                        <br>
+                    </div>
+                    <div class="bar"></div>
+                    <div class="webdec">
+                        <br>
+                        Thank you for visit.<br>
+                        Different with lab2, the background color chaged to gray.
+                        Link to main page is combined with Main title &lt;Norbury&gt;, different with sample lab3.<br>
+                        But Link to signup.html/login.html is still exist on navigation box.<br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script>
+            fetch("product.json")
+            .then(response => {
+                if (!response.ok) {throw new Error(`HTTP error: ${response.status}`);}
+                return response.json();
+            })
+            .then(json => init(json))
+            .catch(error => console.error(`Fetch problem: ${error.message}`));
+            function init(items) {
+                const main = document.querySelector("main");
+                // const category = document.querySelector("#genre");
+                const searchItem = document.querySelector("#searchItem");
+                const searchBtn = document.querySelector("button");
+                let lastCategory = category.value;
+                let lastSearch = "";
+                let categoryGroup; //array
+                let finGroup = items; //array
+                update();
+                categoryGroup = [];
+                finGroup = [];
+                
+                function update() {
+                    while (main.firstChild) {main.removeChild(main.firstChild);}
+                    if (finResult.length === 0) {
+                        const par = document.createElement("p");
+                        par.textContent = "Sorry, we don't have any results for your search.";
+                        main.appendChild(par);
+                    }
+                    else {
+                        for (const item of finGroup) {fetchBlob(item);}
+                    }
+                }
+                function getCategory(e) {
+                    categoryGroup=[];
+                    finGroup=[];
+                    if (category.value === lastCategory && searchItem.value.trim() === lastSearch) {return;}
+                    lastCategory = category.value;
+                    lastSearch = searchItem.value.trim();
+                    if (category.value === "All") {
+                        categoryGroup = items;
+                        getItems();
+                    }
+                    else {
+                        const lowerCaseGenre = category.value.toLowerCase();
+                        categoryGroup = items.filter(item => item.Genre === lowerCaseGenre);
+                    }
+                    getItems();
+                }
+                function getItems() {
+                    if (searchItem.value.trim() === "") {finGroup = categoryGroup;}
+                    else {
+                        const lowerCaseSearchItem = searchItem.value.trim().toLowerCase();
+                        finGroup = categoryGroup.filter(item => item.title.includes(lowerCaseSearchItem));
+                    }
+                    update();
+                }
+                function fetchBlob(item) {
+                    const url = `imgs/${item.image}`;
+                    fetch(url)
+                    .then(response => {
+                        if(!response.ok) {throw new Error(`HTTP error: ${response.status}`);}
+                        return response.blob();
+                    })
+                    .then(blob => buildBook(blob, item))
+                    .catch(error => console.error(`Fetch problem: ${error.message}`));
+                }
+                function buildBook(blob, item) {
+                    const objURL = URL.createObjectURL(blob);
+                    const bookContainer = document.createElement("div");
+                    const image = document.createElement("img");
+                    const bookinfo = document.createElement("div");
+                    bookContainer.setAttribute("class", "realbook");
+                    bookinfo.setAttribute("class", "bname");
+                    image.src = objectURL;
+                    image.alt = item.title;
+                    main.appendChild(bookContainer);
+                    bookContainer.appendChild(image);
+                    bookContainer.appendChild(bookinfo);
+                }
+            }
+        </script>
+    </body>
+</html>

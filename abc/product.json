@@ -1,0 +1,79 @@
+[
+    {
+        "title": "Black Orpheus",
+        "Key": "C",
+        "Price": 2000,
+        "Composer": "Luiz Bonfa",
+        "image": "blackOrpheus.png"
+    },
+    {
+        "title": "Blue Bossa",
+        "Key": "Eb",
+        "Price": 1000,
+        "Composer": "Joe Henderson",
+        "image": "blueBossa.png"
+    },
+    {
+        "title": "Donna Lee",
+        "Key": "Ab",
+        "Price": 1000,
+        "Composer": "Error Garner",
+        "image": "donnaLee.png"
+    },
+    {
+        "title": "Giant Steps",
+        "Key": "C",
+        "Price": 1000,
+        "Composer": "Error Garner",
+        "image": "giantSteps.png"
+    },
+    {
+        "title": "Just Friends",
+        "Key": "G",
+        "Price": 1000,
+        "Composer": "Error Garner",
+        "image": "justFriends.png"
+    },
+    {
+        "title": "Lazy Bird",
+        "Key": "G",
+        "Price": 2000,
+        "Composer": "Error Garner",
+        "image": "lazyBird.png"
+    },
+    {
+        "title": "Misty",
+        "Key": "Eb",
+        "Price": 1000,
+        "Composer": "Erroll Garner",
+        "image": "misty.png"
+    },
+    {
+        "title": "Nardis",
+        "Key": "G",
+        "Price": 1000,
+        "Composer": "Miles Davis",
+        "image": "nardis.png"
+    },
+    {
+        "title": "The Duke",
+        "Key": "C",
+        "Price": 1000,
+        "Composer": "Error Garner",
+        "image": "theDuke.png"
+    },
+    {
+        "title": "There will never be another you",
+        "Key": "Eb",
+        "Price": 2000,
+        "Composer": ["Harry Warren", "Mack Gordon"],
+        "image": "misty_Eb.png"
+    },
+    {
+        "title": "So What",
+        "Key": "C",
+        "Price": 3000,
+        "Composer": "Miles Davis",
+        "image": "soWhat.png"
+    }
+]
